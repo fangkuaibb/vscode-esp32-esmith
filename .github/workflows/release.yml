@@ -28,8 +28,23 @@ jobs:
           name: esmith-vsix
           path: '*.vsix'
 
+  release:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: esmith-vsix
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: '*.vsix'
+          generate_release_notes: true
+
   publish-vscode:
     needs: package
+    if: vars.PUBLISH_TO_MARKETPLACES == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +58,7 @@ jobs:
 
   publish-openvsx:
     needs: package
+    if: vars.PUBLISH_TO_MARKETPLACES == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
