@@ -268,7 +268,7 @@
     "typecheck": "tsc --noEmit",
     "test:clean": "node -e \"require('fs').rmSync('dist-test',{recursive:true,force:true})\"",
     "test:compile": "tsc -p tsconfig.test.json",
-    "test": "npm run test:clean && npm run test:compile && node --test dist-test/test",
+    "test": "npm run test:clean && npm run test:compile && node --test \"dist-test/test/*.test.js\"",
     "package": "npm run typecheck && npm run build && vsce package",
     "vscode:prepublish": "npm run build"
   },
