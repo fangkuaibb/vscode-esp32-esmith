@@ -8,7 +8,7 @@
   "icon": "resources/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fangkuaibb/esmith.git"
+    "url": "https://github.com/fangkuaibb/vscode-esp32-esmith.git"
   },
   "engines": {
     "vscode": "^1.90.0"
