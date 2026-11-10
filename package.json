@@ -1,0 +1,287 @@
+{
+  "name": "esmith",
+  "displayName": "ESmith - ESP32 Closed-Loop Development",
+  "description": "ESP32/ESP-IDF closed-loop development for Trae and VS Code: build, flash, serial verify and MCP tools.",
+  "version": "0.1.0",
+  "publisher": "fangkuaibb",
+  "license": "Apache-2.0",
+  "icon": "resources/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fangkuaibb/esmith.git"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Testing"
+  ],
+  "keywords": [
+    "esp32",
+    "esp-idf",
+    "embedded",
+    "mcp",
+    "trae"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:**/CMakeLists.txt",
+    "onCommand:esmith.closedLoop",
+    "onCommand:esmith.doctor",
+    "onCommand:esmith.initProject",
+    "onCommand:esmith.newProject",
+    "onCommand:esmith.registerMcp",
+    "onCommand:esmith.setupAgent",
+    "onCommand:esmith.cleanupOpenOcd",
+    "onCommand:esmith.showSerial"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "esmith.doctor",
+        "title": "%esmith.doctor.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.initProject",
+        "title": "%esmith.initProject.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.newProject",
+        "title": "%esmith.newProject.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.closedLoop",
+        "title": "%esmith.closedLoop.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.stop",
+        "title": "%esmith.stop.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.showMenu",
+        "title": "%esmith.showMenu.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.showOutput",
+        "title": "%esmith.showOutput.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.showSerial",
+        "title": "%esmith.showSerial.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.registerMcp",
+        "title": "%esmith.registerMcp.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.installRules",
+        "title": "%esmith.installRules.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.setupAgent",
+        "title": "%esmith.setupAgent.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.cleanupOpenOcd",
+        "title": "%esmith.cleanupOpenOcd.title%",
+        "category": "ESmith"
+      },
+      {
+        "command": "esmith.refresh",
+        "title": "%esmith.refresh.title%",
+        "category": "ESmith",
+        "icon": "$(refresh)"
+      }
+    ],
+    "configuration": {
+      "title": "ESmith",
+      "properties": {
+        "esmith.idfPath": {
+          "type": "string",
+          "default": "",
+          "description": "%esmith.idfPath.description%",
+          "scope": "resource"
+        },
+        "esmith.monitorBaudRate": {
+          "type": "number",
+          "default": 115200,
+          "description": "%esmith.monitorBaudRate.description%",
+          "scope": "resource"
+        },
+        "esmith.flashBaudRate": {
+          "type": "number",
+          "default": 460800,
+          "description": "%esmith.flashBaudRate.description%",
+          "scope": "resource"
+        },
+        "esmith.monitorMs": {
+          "type": "number",
+          "default": 5000,
+          "description": "%esmith.monitorMs.description%",
+          "scope": "resource"
+        },
+        "esmith.expectedPattern": {
+          "type": "string",
+          "default": "",
+          "description": "%esmith.expectedPattern.description%",
+          "scope": "resource"
+        },
+        "esmith.retries": {
+          "type": "number",
+          "default": 2,
+          "description": "%esmith.retries.description%",
+          "scope": "resource"
+        },
+        "esmith.reflashOnVerifyFailure": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.reflashOnVerifyFailure.description%",
+          "scope": "resource"
+        },
+        "esmith.closedLoop.serialHint": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.closedLoop.serialHint.description%",
+          "scope": "resource"
+        },
+        "esmith.closedLoop.serialMirror": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.closedLoop.serialMirror.description%",
+          "scope": "resource"
+        },
+        "esmith.mcp.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.mcp.enabled.description%",
+          "scope": "window"
+        },
+        "esmith.mcp.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "%esmith.mcp.host.description%",
+          "scope": "window"
+        },
+        "esmith.mcp.port": {
+          "type": "number",
+          "default": 37821,
+          "description": "%esmith.mcp.port.description%",
+          "scope": "window"
+        },
+        "esmith.mcp.autoRegister": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.mcp.autoRegister.description%",
+          "scope": "resource"
+        },
+        "esmith.mcp.autoRegisterGlobal": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.mcp.autoRegisterGlobal.description%",
+          "scope": "window"
+        },
+        "esmith.mcp.timeoutMs": {
+          "type": "number",
+          "default": 600000,
+          "description": "%esmith.mcp.timeoutMs.description%",
+          "scope": "window"
+        },
+        "esmith.agentRules.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.agentRules.enabled.description%",
+          "scope": "resource"
+        },
+        "esmith.agentRules.autoInstall": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.agentRules.autoInstall.description%",
+          "scope": "resource"
+        },
+        "esmith.openocd.autoFixTapId": {
+          "type": "boolean",
+          "default": true,
+          "description": "%esmith.openocd.autoFixTapId.description%",
+          "scope": "resource"
+        },
+        "esmith.openocd.scriptsPath": {
+          "type": "string",
+          "default": "",
+          "description": "%esmith.openocd.scriptsPath.description%",
+          "scope": "resource"
+        },
+        "esmith.openocd.adapterSpeed": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "default": 0,
+          "description": "%esmith.openocd.adapterSpeed.description%",
+          "scope": "resource"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "esmith",
+          "title": "ESmith",
+          "icon": "resources/hammer.svg"
+        }
+      ]
+    },
+    "views": {
+      "esmith": [
+        {
+          "id": "esmith.explorer",
+          "name": "%esmith.view.explorer.name%"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "esmith.refresh",
+          "when": "view == esmith.explorer",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test:clean": "node -e \"require('fs').rmSync('dist-test',{recursive:true,force:true})\"",
+    "test:compile": "tsc -p tsconfig.test.json",
+    "test": "npm run test:clean && npm run test:compile && node --test dist-test/test",
+    "package": "npm run typecheck && npm run build && vsce package",
+    "vscode:prepublish": "npm run build"
+  },
+  "dependencies": {
+    "serialport": "^12.0.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.6.2",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0",
+    "zod": "^3.25.0"
+  }
+}
