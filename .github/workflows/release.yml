@@ -1,9 +1,13 @@
-name: Release VSIX
+name: Release
 
 on:
   push:
     tags:
       - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   package:
@@ -12,13 +16,40 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-      - run: npm run package
+      - run: npm run build
+      - run: npx @vscode/vsce@latest package
       - uses: actions/upload-artifact@v4
         with:
           name: esmith-vsix
           path: '*.vsix'
+
+  publish-vscode:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: esmith-vsix
+      - run: npx @vscode/vsce@latest publish --oidc --packagePath "$(ls *.vsix | head -n 1)"
+
+  publish-openvsx:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: esmith-vsix
+      - run: npx ovsx@latest publish "$(ls *.vsix | head -n 1)" --trusted-publishing
