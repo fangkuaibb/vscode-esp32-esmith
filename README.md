@@ -118,9 +118,9 @@ ESmith
 ```powershell
 npm install
 npm run package
-code --install-extension esmith-0.1.0.vsix --force
+code --install-extension esmith-0.1.1.vsix --force
 # Trae:
-# trae-cn --install-extension esmith-0.1.0.vsix --force
+# trae-cn --install-extension esmith-0.1.1.vsix --force
 ```
 
 安装后执行 `Developer: Reload Window`。

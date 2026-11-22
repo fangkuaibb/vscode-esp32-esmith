@@ -2,7 +2,7 @@
   "name": "esmith",
   "displayName": "ESmith - ESP32 Closed-Loop Development",
   "description": "ESP32/ESP-IDF closed-loop development for Trae and VS Code: build, flash, serial verify and MCP tools.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "fangkuaibb",
   "license": "Apache-2.0",
   "icon": "resources/icon.png",
